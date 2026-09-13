@@ -35,11 +35,17 @@
 
   <h2>Listado de productos</h2>
 
-  @for (elemento of elementos; track $index) {
-    <app-item
-      [nombre]="elemento.nombre"
-      [descripcion]="elemento.descripcion">
-    </app-item>
-  }
+  <ul class="list-group">
+    <li
+      class="list-group-item"
+      *ngFor="let elemento of elementos">
+
+      <app-item
+        [nombre]="elemento.nombre"
+        [descripcion]="elemento.descripcion">
+      </app-item>
+
+    </li>
+  </ul>
 
 </div>
