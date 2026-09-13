@@ -13,4 +13,11 @@ export class Listado {
     { nombre: 'Mouse', descripcion: 'Dispositivo para controlar el cursor' },
     { nombre: 'Teclado', descripcion: 'Dispositivo para ingresar texto' }
   ];
+
+  agregar(nombre: string, descripcion: string): void {
+    this.elementos.push({
+      nombre: nombre,
+      descripcion: descripcion
+    });
+  }
 }

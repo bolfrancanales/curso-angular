@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, HostBinding, input } from '@angular/core';
 
 @Component({
   selector: 'app-item',
@@ -7,6 +7,8 @@ import { Component, input } from '@angular/core';
   styleUrl: './item.css',
 })
 export class Item {
+  @HostBinding('class') cssClass = 'd-block mb-3';
+
   nombre = input('');
   descripcion = input('');
 }

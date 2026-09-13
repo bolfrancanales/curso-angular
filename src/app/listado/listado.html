@@ -1,10 +1,45 @@
 <div class="container mt-4">
+
+  <h2>Agregar producto</h2>
+
+  <div class="card mb-4">
+    <div class="card-body">
+
+      <div class="mb-3">
+        <label class="form-label">Nombre</label>
+        <input
+          type="text"
+          class="form-control"
+          #nombre
+          placeholder="Ingrese el nombre">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Descripción</label>
+        <input
+          type="text"
+          class="form-control"
+          #descripcion
+          placeholder="Ingrese la descripción">
+      </div>
+
+      <button
+        type="button"
+        class="btn btn-primary"
+        (click)="agregar(nombre.value, descripcion.value)">
+        Agregar
+      </button>
+
+    </div>
+  </div>
+
   <h2>Listado de productos</h2>
 
-  @for (elemento of elementos; track elemento.nombre) {
+  @for (elemento of elementos; track $index) {
     <app-item
       [nombre]="elemento.nombre"
       [descripcion]="elemento.descripcion">
     </app-item>
   }
+
 </div>
