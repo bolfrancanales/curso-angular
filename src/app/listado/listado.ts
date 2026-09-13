@@ -1,24 +1,54 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+
 import { Item } from '../item/item';
+import { FormularioProducto } from '../formulario-producto/formulario-producto';
+import { Producto } from '../store/producto.reducer';
+
+import {
+  agregarProducto,
+  borrarProducto,
+  votoPositivo,
+  votoNegativo
+} from '../store/producto.actions';
 
 @Component({
   selector: 'app-listado',
-  imports: [CommonModule, Item],
+  imports: [CommonModule, Item, FormularioProducto],
   templateUrl: './listado.html',
   styleUrl: './listado.css',
 })
 export class Listado {
-  elementos = [
-    { nombre: 'Laptop', descripcion: 'Computadora para trabajo y estudio' },
-    { nombre: 'Mouse', descripcion: 'Dispositivo para controlar el cursor' },
-    { nombre: 'Teclado', descripcion: 'Dispositivo para ingresar texto' }
-  ];
 
-  agregar(nombre: string, descripcion: string): void {
-    this.elementos.push({
-      nombre: nombre,
-      descripcion: descripcion
-    });
+  productos$: Observable<Producto[]>;
+
+  constructor(private store: Store<{ productos: Producto[] }>) {
+    this.productos$ = this.store.select('productos');
+  }
+
+  agregarProducto(producto: {
+    nombre: string;
+    descripcion: string;
+  }): void {
+    this.store.dispatch(
+      agregarProducto({
+        nombre: producto.nombre,
+        descripcion: producto.descripcion
+      })
+    );
+  }
+
+  borrar(id: number): void {
+    this.store.dispatch(borrarProducto({ id }));
+  }
+
+  votarPositivo(id: number): void {
+    this.store.dispatch(votoPositivo({ id }));
+  }
+
+  votarNegativo(id: number): void {
+    this.store.dispatch(votoNegativo({ id }));
   }
 }
