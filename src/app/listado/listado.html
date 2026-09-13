@@ -1,0 +1,10 @@
+<div class="container mt-4">
+  <h2>Listado de productos</h2>
+
+  @for (elemento of elementos; track elemento.nombre) {
+    <app-item
+      [nombre]="elemento.nombre"
+      [descripcion]="elemento.descripcion">
+    </app-item>
+  }
+</div>
