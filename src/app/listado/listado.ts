@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Item } from '../item/item';
 import { FormularioProducto } from '../formulario-producto/formulario-producto';
 import { Producto } from '../store/producto.reducer';
+import { ProductoApi } from '../services/producto-api';
 
 import {
   agregarProducto,
@@ -24,21 +25,18 @@ export class Listado {
 
   productos$: Observable<Producto[]>;
 
-  constructor(private store: Store<{ productos: Producto[] }>) {
-    this.productos$ = this.store.select('productos');
-  }
+  constructor(
+  private store: Store<{ productos: Producto[] }>,
+  private productoApi: ProductoApi
+) {
+  this.productos$ = this.store.select('productos');
+}
 
-  agregarProducto(producto: {
-    nombre: string;
-    descripcion: string;
-  }): void {
-    this.store.dispatch(
-      agregarProducto({
-        nombre: producto.nombre,
-        descripcion: producto.descripcion
-      })
-    );
-  }
+  agregarProducto(producto: { nombre: string; descripcion: string }): void {
+  this.productoApi
+    .agregarProducto(producto.nombre, producto.descripcion)
+    .subscribe();
+}
 
   borrar(id: number): void {
     this.store.dispatch(borrarProducto({ id }));

@@ -1,0 +1,29 @@
+<div class="container mt-4">
+
+  <div class="alert alert-success">
+
+    <h2>Componente protegido</h2>
+
+    <p>
+      Acceso autorizado. El usuario ha iniciado sesión correctamente.
+    </p>
+
+    <p>
+      <strong>Aplicación:</strong> {{ config.nombreAplicacion }}
+    </p>
+
+    <p>
+      <strong>API:</strong> {{ config.apiUrl }}
+    </p>
+
+    <p>
+  <strong>useClass:</strong> {{ mensaje.obtenerMensaje() }}
+</p>
+
+<p>
+  <strong>useExisting:</strong> {{ mensajeExistente.obtenerMensaje() }}
+</p>
+
+  </div>
+
+</div>

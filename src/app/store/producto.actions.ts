@@ -19,3 +19,13 @@ export const votoNegativo = createAction(
   '[Productos] Voto Negativo',
   props<{ id: number }>()
 );
+
+export const agregarProductoApi = createAction(
+  '[Productos API] Agregar Producto Exitoso',
+  props<{
+    id: number;
+    nombre: string;
+    descripcion: string;
+    votos: number;
+  }>()
+);

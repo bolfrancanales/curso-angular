@@ -3,7 +3,8 @@ import {
   agregarProducto,
   borrarProducto,
   votoPositivo,
-  votoNegativo
+  votoNegativo,
+  agregarProductoApi
 } from './producto.actions';
 
 export interface Producto {
@@ -60,10 +61,21 @@ export const productoReducer = createReducer(
   ),
 
   on(votoNegativo, (estado, { id }) =>
-    estado.map(producto =>
-      producto.id === id
-        ? { ...producto, votos: producto.votos - 1 }
-        : producto
-    )
+  estado.map(producto =>
+    producto.id === id
+      ? { ...producto, votos: producto.votos - 1 }
+      : producto
   )
+),
+
+on(agregarProductoApi, (estado, producto) => [
+  ...estado,
+  {
+    id: producto.id,
+    nombre: producto.nombre,
+    descripcion: producto.descripcion,
+    votos: producto.votos
+  }
+])
+  
 );
