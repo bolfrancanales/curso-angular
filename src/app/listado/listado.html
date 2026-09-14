@@ -26,20 +26,26 @@
           <button
             type="button"
             class="btn btn-success me-2"
+            appTrackingClick
+            data-tracking-tag="voto-positivo"
             (click)="votarPositivo(producto.id)">
             Voto +
           </button>
 
           <button
-            type="button"
-            class="btn btn-warning me-2"
-            (click)="votarNegativo(producto.id)">
-            Voto -
+          type="button"
+          class="btn btn-warning me-2"
+          appTrackingClick
+          data-tracking-tag="voto-negativo"
+          (click)="votarNegativo(producto.id)">
+          Voto -
           </button>
 
           <button
             type="button"
             class="btn btn-danger"
+            appTrackingClick
+            data-tracking-tag="borrar-producto"
             (click)="borrar(producto.id)">
             Eliminar
           </button>
@@ -51,5 +57,33 @@
     </li>
 
   </ul>
+  <div
+  class="card mt-4 mb-4"
+  *ngIf="tracking$ | async as tracking">
+
+  <div class="card-body">
+
+    <h3>Seguimiento de actividad</h3>
+
+    <p>
+      Voto positivo:
+      {{ tracking['voto-positivo'] || 0 }}
+    </p>
+
+    <p>
+      Voto negativo:
+      {{ tracking['voto-negativo'] || 0 }}
+    </p>
+
+    <p>
+      Eliminar producto:
+      {{ tracking['eliminar-producto'] || 0 }}
+    </p>
+
+  </div>
+
+</div>
+    <app-mapa></app-mapa>
+    <app-animacion-demo></app-animacion-demo>
 
 </div>

@@ -9,6 +9,8 @@ import { APP_CONFIG, CONFIGURACION } from './config/app-config';
 import { Mensaje, MensajePersonalizado } from './services/mensaje';
 import { MENSAJE_EXISTENTE } from './config/mensaje-token';
 import { provideHttpClient } from '@angular/common/http';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import { trackingReducer } from './store/tracking.reducer';
 
 
 export const appConfig: ApplicationConfig = {
@@ -16,10 +18,11 @@ export const appConfig: ApplicationConfig = {
   provideBrowserGlobalErrorListeners(),
   provideRouter(routes),
   provideHttpClient(),
-
+  provideAnimations(),
   provideStore({
-    productos: productoReducer
-  }),
+  productos: productoReducer,
+  tracking: trackingReducer
+}),
 
   {
   provide: APP_CONFIG,

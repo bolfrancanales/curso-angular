@@ -7,6 +7,10 @@ import { Item } from '../item/item';
 import { FormularioProducto } from '../formulario-producto/formulario-producto';
 import { Producto } from '../store/producto.reducer';
 import { ProductoApi } from '../services/producto-api';
+import { Mapa } from '../mapa/mapa';
+import { AnimacionDemo } from '../animacion-demo/animacion-demo';
+import { TrackingClick } from '../directives/tracking-click';
+import { TrackingState } from '../store/tracking.reducer';
 
 import {
   agregarProducto,
@@ -17,19 +21,21 @@ import {
 
 @Component({
   selector: 'app-listado',
-  imports: [CommonModule, Item, FormularioProducto],
+  imports: [CommonModule, Item, FormularioProducto, Mapa, AnimacionDemo, TrackingClick],
   templateUrl: './listado.html',
   styleUrl: './listado.css',
 })
 export class Listado {
 
   productos$: Observable<Producto[]>;
+  tracking$: Observable<TrackingState>;
 
   constructor(
-  private store: Store<{ productos: Producto[] }>,
+  private store: Store<{ productos: Producto[]; tracking: TrackingState }>,
   private productoApi: ProductoApi
 ) {
   this.productos$ = this.store.select('productos');
+  this.tracking$ = this.store.select('tracking');
 }
 
   agregarProducto(producto: { nombre: string; descripcion: string }): void {
